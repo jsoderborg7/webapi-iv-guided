@@ -11,7 +11,7 @@ server.use(express.json());
 server.get('/', (req, res) => {
   Shoutouts.find()
   .then(shoutouts => {
-    res.status(200).json(shoutouts);
+    res.status(200).json({messageOfTheDay: process.env.MOTD, shoutouts});
   })
   .catch (error => {
     console.error('\nERROR', error);
@@ -22,7 +22,7 @@ server.get('/', (req, res) => {
 server.post('/', (req, res) => {
   Shoutouts.add(req.body)
   .then(shoutout => {
-    res.status(201).json(shoutout);
+    res.status(201).json({messageOfTheDay: process.env.MOTD, shoutout});
   })
   .catch (error => {
     console.error('\nERROR', error);
